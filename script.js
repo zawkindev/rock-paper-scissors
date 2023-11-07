@@ -15,12 +15,34 @@ function playRound(playerSelection, computerSelection) {
     case "rock":
       return computerSelection == "paper" ? computerSelection : playerSelection;
     case "paper":
-      return computerSelection == "scissors" ? computerSelection : playerSelection;
+      return computerSelection == "scissors"
+        ? computerSelection
+        : playerSelection;
     case "scissors":
       return computerSelection == "rock" ? computerSelection : playerSelection;
   }
 }
 
-const playerSelection = "paper";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+function game() {
+  sum = 0;
+  for (let round = 1; round <= 5; round++) {
+    const computerSelection = getComputerChoice();
+    const playerSelection = prompt(
+      "What's your choice? rock, paper, scissors",
+    ).toLowerCase();
+    const winner = playRound(playerSelection, computerSelection);
+    alert(
+      winner == "draw"
+        ? "Draw!!!"
+        : `${winner} beats ${winner == playerSelection ? computerSelection : playerSelection
+        }`,
+    );
+    winner == playerSelection ? sum++ : sum--;
+  }
+  alert(sum > 0 ? "You win!" : "You Lose!");
+  if (sum == 0) {
+    alert("Draw!");
+  }
+}
+
+game();
